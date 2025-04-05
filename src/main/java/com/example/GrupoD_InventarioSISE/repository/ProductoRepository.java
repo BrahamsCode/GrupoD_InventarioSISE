@@ -44,4 +44,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
             "LOWER(p.imagen_url) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
             "LOWER(p.informacion_fabricante_url) LIKE LOWER(CONCAT('%', :search, '%')))")
     Page<Producto> paginarProductosPorSubCategoria(@Param("idsubcategoria") Long idsubcategoria, @Param("search") String search, Pageable pageable);
+
+    @Query("SELECT p FROM Producto p WHERE p.estado_auditoria = true ")
+    Page<Producto> findAllActive(Pageable Pageable);
 }

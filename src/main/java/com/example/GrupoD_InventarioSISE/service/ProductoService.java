@@ -28,7 +28,7 @@ public class ProductoService implements IProductoService{
     public Page<ProductoDto> Paginado(String search, Pageable pageable) {
         Page<Producto> productos;
         if (search == null || search.isEmpty()) {
-            productos = productoRepository.findAll(pageable);
+            productos = productoRepository.findAllActive(pageable);
         } else {
             productos = productoRepository.paginarProductos(search, pageable);
         }
