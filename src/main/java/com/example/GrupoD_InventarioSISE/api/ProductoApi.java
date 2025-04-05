@@ -44,4 +44,10 @@ public class ProductoApi {
     ) {
         return iProductoService.listarDtoPorSubCategoria(id, search, PageRequest.of(page, size));
     }
+
+    @GetMapping("/{id}")
+    public ProductoDto obtenerPorId(@PathVariable Long id) {
+        return iProductoService.obtenerDtoPorId(id);
+    }
+        
 }

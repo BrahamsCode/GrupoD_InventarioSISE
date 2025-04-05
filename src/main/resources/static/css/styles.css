@@ -1,8 +1,17 @@
+/* Estilos generales */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f8f9fa;
 }
 
+/* Mejoras para tablas responsivas */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+}
+
+/* Estilo para tabla con borde y sombra */
 .table-container {
   margin: 20px 0;
   background-color: #fff;
@@ -12,85 +21,167 @@ body {
   overflow-x: auto;
 }
 
-.table-responsive {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.table th,
-.table td {
-  white-space: nowrap;
-}
-
-@media (max-width: 992px) {
-  .table th,
-  .table td {
-    padding: 0.5rem;
-    font-size: 0.9rem;
-  }
-}
-
-.main-content {
-  padding: 15px;
-  overflow-x: hidden;
-}
-
-.sidebar {
-  position: fixed;
-  height: 100%;
-  z-index: 100;
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    position: static;
-    height: auto;
-  }
-}
-
-.nav-link {
-  color: #ddd;
-}
-
-.nav-link:hover {
-  color: white;
-}
-
-.nav-link.active {
-  background-color: #007bff;
-}
-
-.participation-box {
-  margin-top: 30px;
-  background-color: #f1f1f1;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-}
-
-.btn-return {
-  margin-top: 15px;
-}
-
+/* Ajustes para DataTables */
 .dataTables_wrapper {
   padding: 10px 0;
 }
 
+.dataTables_length select,
 .dataTables_filter input {
   padding: 5px 10px;
   border-radius: 4px;
   border: 1px solid #ced4da;
 }
 
-.dataTables_length select {
+.dataTables_paginate .paginate_button {
   padding: 5px 10px;
+  margin: 0 2px;
   border-radius: 4px;
-  border: 1px solid #ced4da;
 }
 
+.dataTables_paginate .paginate_button.current {
+  background-color: #0d6efd;
+  color: white !important;
+  border: 1px solid #0d6efd;
+}
+
+/* Estilos para el sidebar */
+.sidebar {
+  position: fixed;
+  height: 100%;
+  z-index: 100;
+  background-color: #ff0e49 !important;
+}
+
+.sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
+  transition: all 0.3s;
+}
+
+.sidebar .nav-link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .nav-link.active {
+  background-color: #0d6efd;
+  color: white;
+}
+
+/* Ajustes para la sección principal con sidebar */
+.main-content {
+  padding: 15px;
+  overflow-x: hidden;
+  margin-left: 16.7%; /* Para compensar el sidebar en pantallas grandes */
+}
+
+/* Caja de participantes */
+.participation-box {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para botones de acción */
+.btn-action {
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.25rem;
+}
+
+/* Ajustes para pantallas pequeñas y medianas */
+@media (max-width: 992px) {
+  .sidebar {
+    width: auto;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .dataTables_info,
+  .dataTables_paginate {
+    text-align: center;
+    float: none !important;
+    margin-top: 10px;
+  }
+}
+
+/* Para dispositivos móviles */
 @media (max-width: 768px) {
   .sidebar {
+    position: static;
+    height: auto;
     width: 100%;
-    position: relative;
   }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Animación para transiciones */
+.nav-link,
+.btn {
+  transition: all 0.3s ease;
+}
+
+/* Estilo para encabezados de columnas */
+.table .sorting,
+.table .sorting_asc,
+.table .sorting_desc {
+  cursor: pointer;
+  position: relative;
+}
+
+.table .sorting:after,
+.table .sorting_asc:after,
+.table .sorting_desc:after {
+  position: absolute;
+  right: 8px;
+  font-family: "bootstrap-icons";
+}
+
+.table .sorting:after {
+  content: "\f2d0";
+  opacity: 0.5;
+}
+
+.table .sorting_asc:after {
+  content: "\f2d1";
+}
+
+.table .sorting_desc:after {
+  content: "\f2d2";
+}
+
+/* Estilo para números de página */
+.page-item.active .page-link {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* Estilo para el botón de nuevo registro */
+.btn-nuevo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-nuevo i {
+  font-size: 1.2rem;
 }
