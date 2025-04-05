@@ -43,4 +43,12 @@ public class ProductoService implements IProductoService{
         Page<Producto> productos = productoRepository.paginarProductosPorSubCategoria(idsubcategoria, search, pageable);
         return ProductoMapper.toDtoList(productos, pageable);
     }
+    
+    @Override
+    public ProductoDto obtenerDtoPorId(Long id) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
+        return ProductoMapper.toDto(producto);
+    }
+    
 }
