@@ -28,7 +28,7 @@ public class SubCategoriaService implements ISubCategoriaService{
     public Page<SubCategoriaDto> Paginado(String search, Pageable pageable) {
         Page<SubCategoria> subcategorias;
         if (search == null || search.isEmpty()) {
-            subcategorias = subCategoriaRepository.findAll(pageable);
+            subcategorias = subCategoriaRepository.findAllActive(pageable);
         } else {
             subcategorias = subCategoriaRepository.paginarSubCategorias(search, pageable);
         }

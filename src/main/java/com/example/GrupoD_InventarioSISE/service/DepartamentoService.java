@@ -25,7 +25,7 @@ public class DepartamentoService implements IDepartamentoService{
     @Override
     public Page<Departamento> paginado(String search, Pageable pageable) {
         if (search == null || search.isEmpty()) {
-            return departamentoRepository.findAll(pageable);
+            return departamentoRepository.findAllActive(pageable);
         } else {
             return departamentoRepository.paginarDepartamentos(search, pageable);
         }

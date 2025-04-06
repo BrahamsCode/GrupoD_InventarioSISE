@@ -28,4 +28,7 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
             "LOWER(c.nombre) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
             "LOWER(c.imagen_url) LIKE LOWER(CONCAT('%', :search, '%')))")
     Page<Categoria> paginarCategoriasPorDepartamento(@Param("iddepartamento") Long iddepartamento, @Param("search") String search, Pageable pageable);
+
+    @Query("SELECT c FROM Categoria c WHERE c.estado_auditoria = true ")
+    Page<Categoria> findAllActive(Pageable Pageable);
 }

@@ -28,4 +28,7 @@ public interface SubCategoriaRepository extends JpaRepository<SubCategoria, Long
             "LOWER(s.nombre) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
             "LOWER(s.imagen_url) LIKE LOWER(CONCAT('%', :search, '%')))")
     Page<SubCategoria> paginarSubCategoriasPorCategoria(@Param("idcategoria") Long idcategoria, @Param("search") String search, Pageable pageable);
+
+    @Query("SELECT s FROM SubCategoria s WHERE s.estado_auditoria = true ")
+    Page<SubCategoria> findAllActive(Pageable Pageable);
 }

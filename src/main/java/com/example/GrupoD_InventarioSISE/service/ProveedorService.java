@@ -28,7 +28,7 @@ public class ProveedorService implements IProveedorService{
     public Page<ProveedorDto> Paginado(String search, Pageable pageable) {
         Page<Proveedor> proveedores;
         if (search == null || search.isEmpty()) {
-            proveedores = proveedorRepository.findAll(pageable);
+            proveedores = proveedorRepository.findAllActive(pageable);
         } else {
             proveedores = proveedorRepository.paginarProveedores(search, pageable);
         }
