@@ -7,6 +7,7 @@ package com.example.GrupoD_InventarioSISE.iservice;
 import com.example.GrupoD_InventarioSISE.dto.ProductoDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import com.example.GrupoD_InventarioSISE.model.Producto;
 
 /**
  *
@@ -17,5 +18,8 @@ public interface IProductoService {
     Page<ProductoDto> Paginado(String search, Pageable pageable);
     Page<ProductoDto> listarDtoPorSubCategoria(Long idsubcategoria, String search, Pageable pageable);
     ProductoDto obtenerDtoPorId(Long id);
+    Producto obtenerPorId(Long id);
     void eliminar(Long id);
+    void guardar(Producto producto);
+    void actualizar(Producto producto);   
 }

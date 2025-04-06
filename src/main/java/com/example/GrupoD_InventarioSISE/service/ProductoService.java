@@ -58,4 +58,26 @@ public class ProductoService implements IProductoService{
         producto.setEstado_auditoria(false); 
         productoRepository.save(producto);
     }
+
+
+    @Override
+    public Producto obtenerPorId(Long id) {
+        return productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
+    }
+    
+    @Override
+    public void guardar(Producto producto) {
+        producto.setEstado_auditoria(true);
+        productoRepository.save(producto);
+    }
+    
+    @Override
+    public void actualizar(Producto producto) {
+        productoRepository.findById(producto.getId())
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + producto.getId()));
+        
+        productoRepository.save(producto);
+    }
+
 }
