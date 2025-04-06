@@ -55,7 +55,7 @@ public class ProductoApi {
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
         try {
             iProductoService.eliminar(id);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body("Producto eliminado con éxito");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Error al eliminar el producto: " + e.getMessage());

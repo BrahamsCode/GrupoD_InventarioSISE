@@ -55,7 +55,7 @@ public class ProductoService implements IProductoService{
     public void eliminar(Long id) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
-        producto.setEstadoAuditoria(false); // Cambia el estado a inactivo
-        productoRepository.save(producto); // Guarda el producto con el nuevo estado
+        producto.setEstado_auditoria(false); 
+        productoRepository.save(producto);
     }
 }
