@@ -38,11 +38,11 @@ $(document).ready(function () {
             {
                 "data": "id",
                 "render": function (data) {
-                    return '';
+                    return ''; // Esto será rellenado por producto-detalle-modal.js
                 }
             }
         ],
         "lengthMenu": [10, 20, 50, 100],
-        "pageLength": 10
+        "pageLength": 10,
     });
 });

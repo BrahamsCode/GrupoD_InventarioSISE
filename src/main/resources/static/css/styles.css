@@ -185,3 +185,33 @@ body {
 .btn-nuevo i {
   font-size: 1.2rem;
 }
+
+/* Estilos para botones de acción en tabla */
+.btn-group .btn {
+  padding: 0.25rem 0.5rem;
+  margin-right: 2px;
+}
+
+.btn-group .btn i {
+  font-size: 0.875rem;
+}
+
+/* Tooltip personalizado para botones que tienen title */
+[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+[title] {
+  position: relative;
+}

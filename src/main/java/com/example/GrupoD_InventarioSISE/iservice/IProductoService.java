@@ -17,4 +17,5 @@ public interface IProductoService {
     Page<ProductoDto> Paginado(String search, Pageable pageable);
     Page<ProductoDto> listarDtoPorSubCategoria(Long idsubcategoria, String search, Pageable pageable);
     ProductoDto obtenerDtoPorId(Long id);
+    void eliminar(Long id);
 }
