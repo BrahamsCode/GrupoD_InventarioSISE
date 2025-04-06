@@ -21,4 +21,7 @@ public interface MarcaRepository extends JpaRepository<Marca, Long>{
             "LOWER(m.nombre) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
             "LOWER(m.logo_url) LIKE LOWER(CONCAT('%', :search, '%'))")
     Page<Marca> paginarMarcas(@Param("search") String search, Pageable pageable);
+
+    @Query("SELECT m FROM Marca m WHERE m.estado_auditoria = true ")
+    Page<Marca> findAllActive(Pageable Pageable);
 }

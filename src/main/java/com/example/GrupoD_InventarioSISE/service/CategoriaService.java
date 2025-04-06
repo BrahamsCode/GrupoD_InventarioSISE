@@ -28,7 +28,7 @@ public class CategoriaService implements ICategoriaService{
     public Page<CategoriaDto> Paginado(String search, Pageable pageable) {
         Page<Categoria> categorias;
         if (search == null || search.isEmpty()) {
-            categorias = categoriaRepository.findAll(pageable);
+            categorias = categoriaRepository.findAllActive(pageable);
         } else {
             categorias = categoriaRepository.paginarCategorias(search, pageable);
         }

@@ -22,4 +22,7 @@ public interface DepartamentoRepository extends JpaRepository<Departamento, Long
             "LOWER(d.descripcion) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
             "LOWER(d.imagen_url) LIKE LOWER(CONCAT('%', :search, '%'))")
     Page<Departamento> paginarDepartamentos(@Param("search") String search, Pageable pageable);
+
+    @Query("SELECT d FROM Departamento d WHERE d.estado_auditoria = true ")
+    Page<Departamento> findAllActive(Pageable Pageable);
 }

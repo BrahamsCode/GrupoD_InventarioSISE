@@ -25,7 +25,7 @@ public class MarcaService implements IMarcaService{
     @Override
     public Page<Marca> paginado(String search, Pageable pageable) {
         if (search == null || search.isEmpty()) {
-            return marcaRepository.findAll(pageable);
+            return marcaRepository.findAllActive(pageable);
         } else {
             return marcaRepository.paginarMarcas(search, pageable);
         }

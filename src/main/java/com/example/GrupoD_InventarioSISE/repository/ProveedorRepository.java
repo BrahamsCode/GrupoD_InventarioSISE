@@ -24,4 +24,7 @@ public interface ProveedorRepository extends JpaRepository<Proveedor, Long>{
             "LOWER(p.telefono) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
             "LOWER(p.correo) LIKE LOWER(CONCAT('%', :search, '%'))")
     Page<Proveedor> paginarProveedores(@Param("search") String search, Pageable pageable);
+
+    @Query("SELECT p FROM Proveedor p WHERE p.estado_auditoria = true ")
+    Page<Proveedor> findAllActive(Pageable Pageable);
 }
