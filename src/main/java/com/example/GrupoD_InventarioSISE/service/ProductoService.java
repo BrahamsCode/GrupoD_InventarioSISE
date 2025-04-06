@@ -50,5 +50,12 @@ public class ProductoService implements IProductoService{
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
         return ProductoMapper.toDto(producto);
     }
-    
+
+    @Override
+    public void eliminar(Long id) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
+        producto.setEstadoAuditoria(false); // Cambia el estado a inactivo
+        productoRepository.save(producto); // Guarda el producto con el nuevo estado
+    }
 }
