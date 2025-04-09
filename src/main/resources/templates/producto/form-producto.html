@@ -29,9 +29,13 @@
                                 
                                 <div class="mb-3">
                                     <label for="marca" class="form-label">Marca</label>
-                                    <select id="marca" class="form-select" required>
-                                        <option value="">Seleccione una marca</option>
+                                    <select id="marca" name="marca" class="form-select" required>
+                                        <option value="" disabled selected>Seleccione una marca</option>
                                         <!-- Se llenará con AJAX -->
+                                        <option th:each="marca : ${marcas}" 
+                                                th:value="${marca.id}" 
+                                                th:text="${marca.nombre}">
+                                        </option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Por favor seleccione una marca.

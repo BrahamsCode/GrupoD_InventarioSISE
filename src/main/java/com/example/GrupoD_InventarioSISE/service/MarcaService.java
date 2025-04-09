@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 /**
  *
@@ -29,5 +30,9 @@ public class MarcaService implements IMarcaService{
         } else {
             return marcaRepository.paginarMarcas(search, pageable);
         }
+    }
+
+    public List<Marca> listarTodas() {
+        return marcaRepository.findAll();
     }
 }
