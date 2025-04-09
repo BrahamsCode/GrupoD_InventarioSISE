@@ -34,6 +34,16 @@ public class SubCategoriaApi {
     ) {
         return iSubCategoriaService.Paginado(search, PageRequest.of(page, size));
     }
+
+
+    @GetMapping("/listartodo")
+    public Page<SubCategoriaDto> listartodo(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "1000") int size,
+            @RequestParam(value = "search", required = false) String search
+    ) {
+        return iSubCategoriaService.Paginado(search, PageRequest.of(page, size));
+    }
     
     @GetMapping("/listar-categoria/{id}")
     public Page<SubCategoriaDto> listarPorCategoria(
