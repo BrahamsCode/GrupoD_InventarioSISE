@@ -20,4 +20,9 @@ public class DepartamentoController {
     public String mantenimiento() {
         return "departamento/mantenimiento-departamento";
     }
+
+    @GetMapping("/home")
+    public String homedepartamento() {
+        return "departamento/home-departamento";
+    }
 }

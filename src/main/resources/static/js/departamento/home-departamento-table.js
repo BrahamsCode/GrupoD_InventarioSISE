@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    let departamentoId = window.location.pathname.split("/").pop();
-    $('#tblCategoria').DataTable({
+   
+    $('#tblDepartamento').DataTable({
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "/api/categoria/listar-departamento/" + departamentoId,
+            "url": "/api/departamento",
             "type": "GET",
             "data": function (d) {
                 d.page = d.start / d.length;
@@ -22,10 +22,10 @@ $(document).ready(function () {
                 "data": "id"
             },
             {
-                "data": "nombre_departamento"
+                "data": "nombre"
             },
             {
-                "data": "nombre"
+                "data": "descripcion"
             },
             {
                 "data": "imagen_url"
@@ -33,15 +33,11 @@ $(document).ready(function () {
             {
                 "data": "id",
                 "render": function (data, _, _) {
-                    return '<a class="btn btn-outline-success" href="/subcategoria/' + data + '">Ver SubCategorias</a>';
+                    return '<a class="btn btn-outline-success" href="/categoria/' + data + '">Ver Categorias</a>';
                 }
             }
         ],
         "lengthMenu": [3, 6, 9, 12],
         "pageLength": 3
-    });
-    
-    $(".btn-return").click(function () {
-        window.history.back();
     });
 });

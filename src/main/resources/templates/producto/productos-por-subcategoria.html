@@ -1,56 +1,40 @@
 <!DOCTYPE html>
-<html lang="es">
-    <head>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout :: head('Productos por Subcategoría')}">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mantenimiento de Productos</title>
-
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
-
-        <!-- Estilos personalizados -->
-        <link rel="stylesheet" th:href="@{/css/styles.css}">
-        
-        <!-- jQuery y DataTables -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+        <title>Productos por Subcategoría</title>
     </head>
     <body>
+        <div th:replace="~{layout :: main-content(~{::div.content})}">
+            <div class="content">
+                <h2 class="mb-4">Productos por Subcategoría</h2>
 
-        <h2>Productos</h2>
-        <div class="container">
-            
-            <div class="table-container">
-                <table id="tblProducto" class="table table-bordered table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Categoría</th>
-                            <th>Marca</th>
-                            <th>Proveedor</th>
-                            <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Especificaciones</th>
-                            <th>Precio</th>
-                            <th>Stock</th>
-                            <th>Imagen Url</th>
-                            <th>Información Fabricante</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                </table>
+                <div class="table-responsive">
+                    <table id="tblProducto" class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Categoría</th>
+                                <th>Marca</th>
+                                <th>Proveedor</th>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Especificaciones</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Imagen Url</th>
+                                <th>Información Fabricante</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <button class="btn btn-primary btn-return">Retornar</button>
             </div>
-
-            <button class="btn btn-primary btn-return">Retornar</button>
         </div>
-
-
-
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+        <th:block th:replace="~{layout :: scripts}"></th:block>
         <!-- DataTables Script -->
         <script th:src="@{/js/producto/producto-subcategoria-table.js}"></script>
 
