@@ -30,5 +30,32 @@ public class DepartamentoService implements IDepartamentoService{
             return departamentoRepository.paginarDepartamentos(search, pageable);
         }
     }
+
+    @Override
+    public Departamento listarPorId(Long id) {
+        return departamentoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Departamento no encontrado con ID: " + id));
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        Departamento departamento = departamentoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Departamento no encontrado con ID: " + id));
+        departamento.setEstado_auditoria(false); // Cambiar el estado a inactivo
+        departamentoRepository.save(departamento);
+    }
+
+    @Override
+    public void guardar(Departamento departamento) {
+        departamento.setEstado_auditoria(true); // Establecer el estado como activo
+        departamentoRepository.save(departamento);
+    }
+
+    @Override
+    public void actualizar(Departamento departamento) {
+        departamentoRepository.findById(departamento.getId())
+                .orElseThrow(() -> new RuntimeException("Departamento no encontrado con ID: " + departamento.getId()));
+        departamentoRepository.save(departamento);
+    }
     
 }

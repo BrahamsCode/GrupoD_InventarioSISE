@@ -38,76 +38,58 @@ $(document).ready(function() {
         window.location.href = '/departamento';
     });
  
-    // Función para cargar datos de una categoria existente
-    function cargarDatosDepartamentos(id) {
+    // Función para cargar datos de un departamento existente
+    function cargarDatosDepartamento(id) {
         $.ajax({
-            url: '/api/categoria/' + id,
+            url: '/api/departamento/' + id,
             type: 'GET',
-            success: function(categoria) {
-                // Buscar los IDs correspondientes a los nombres
-                buscarIdDepartamento(categoria.nombre_departamento).then(function(departamentoId) {
-                    $('#departamento').val(departamentoId);
-                });
+            success: function(departamento) {
                 // Llenar los demás campos
-                $('#nombre').val(categoria.nombre);
-                $('#imagen_url').val(categoria.imagen_url);
+                $('#nombre').val(departamento.nombre);
+                $('#descripcion').val(departamento.descripcion);
+                $('#imagen_url').val(departamento.imagen_url);
             },
             error: function() {
-                mostrarNotificacion('Error al cargar los datos de la categoria', 'danger');
+                mostrarNotificacion('Error al cargar los datos del departamento', 'danger');
             }
         });
     }
     
-    // Funciones para buscar IDs por nombre
-    function buscarIdDepartamento(nombre) {
-        return new Promise(function(resolve, reject) {
-            $.ajax({
-                url: '/api/departamento/buscar-por-nombre?nombre=' + encodeURIComponent(nombre),
-                type: 'GET',
-                success: function(data) {
-                    resolve(data.id);
-                },
-                error: function() {
-                    reject();
-                }
-            });
-        });
-    }
     
-    // Función para guardar una nueva categoria
-    function guardarCategoria(categoria) {
+    // Función para guardar un nuevo departamento
+    function guardarDepartamento(departamento) {
         $.ajax({
-            url: '/api/categoria',
+            url: '/api/departamento',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(categoria),
+            data: JSON.stringify(departamento),
             success: function() {
-                mostrarNotificacion('Categoría guardada correctamente', 'success');
+                mostrarNotificacion('Departamento guardada correctamente', 'success');
                 setTimeout(function() {
-                    window.location.href = '/categoria';
+                    window.location.href = '/departamento';
                 }, 1500);
             },
             error: function() {
-                mostrarNotificacion('Error al guardar la categoria', 'danger');
+                mostrarNotificacion('Error al guardar el departamento', 'danger');
             }
         });
     }
     
-    // Función para actualizar una categoria existente
-    function actualizarCategoria(id, categoria) {
+    // Función para actualizar un departamento existente
+    function actualizarDepartamento(id, departamento) {
         $.ajax({
-            url: '/api/categoria/' + id,
+            url: '/api/departamento/' + id,
             type: 'PUT',
             contentType: 'application/json',
-            data: JSON.stringify(categoria),
+            data: JSON.stringify(departamento),
             success: function() {
-                mostrarNotificacion('Categoria actualizada correctamente', 'success');
+                mostrarNotificacion('Departamento actualizada correctamente', 'success');
                 setTimeout(function() {
-                    window.location.href = '/categoria';
+                    window.location.href = '/departamento';
                 }, 1500);
             },
             error: function() {
-                mostrarNotificacion('Error al actualizar la categoria', 'danger');
+                mostrarNotificacion('Error al actualizar el departamento', 'danger');
             }
         });
     }
