@@ -44,4 +44,10 @@ public class SubCategoriaService implements ISubCategoriaService{
         return SubCategoriaMapper.toDtoList(subcategorias, pageable);
     }
 
+    @Override
+    public void guardar(SubCategoria subcategoria) {
+        subcategoria.setEstado_auditoria(true);
+        subCategoriaRepository.save(subcategoria);
+    }
+
 }
