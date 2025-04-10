@@ -10,7 +10,7 @@ $(document).ready(function() {
             const actionCell = row.find('td:last');
             
             // Agregar botones de acción
-            if (actionCell.find('.btn-ver-detalle').length === 0) {
+            if (actionCell.find('.btn-editar').length === 0) {
                 actionCell.html(`
                     <div class="btn-group" role="group">
                         <button class="btn btn-primary btn-sm btn-editar" data-id="${id}" title="Editar">
@@ -25,66 +25,37 @@ $(document).ready(function() {
         });
     });
     
-    // Manejador para botón de ver detalles
-    $('#tblSubCategoria').on('click', '.btn-ver-detalle', function() {
-        const id = $(this).data('id');
-        
-        // Obtener los datos completos de la subcategoria
-        $.ajax({
-            url: '/api/subcategoria/' + id,
-            type: 'GET',
-            success: function(subcategoria) {
-                subcategoriaSeleccionada = subcategoria;
-                cargarDatosEnModal(subcategoria);
-                $('#detalleSubcategoriaModal').modal('show');
-            },
-            error: function() {
-                mostrarNotificacion('Error al cargar los detalles de la subcategoria', 'danger');
-            }
-        });
-    });
-    
-    // Manejador para botón de editar en la tabla
-    $('#tblSubCategoria').on('click', '.btn-editar', function() {
+    // Manejador para botón de editar en la tabla (desvinculamos primero)
+    $('#tblSubCategoria').off('click', '.btn-editar').on('click', '.btn-editar', function() {
         const id = $(this).data('id');
         window.location.href = '/subcategoria/editar/' + id;
     });
     
-    // Manejador para botón de eliminar en la tabla
-    $('#tblSubCategoria').on('click', '.btn-eliminar', function() {
+    // Manejador para botón de eliminar en la tabla (desvinculamos primero)
+    $('#tblSubCategoria').off('click', '.btn-eliminar').on('click', '.btn-eliminar', function() {
         const id = $(this).data('id');
         
-        if (confirm('¿Está seguro de eliminar esta subcategoria? Esta acción desactivará la subcategoria en el sistema.')) {
+        if (confirm('¿Está seguro de eliminar esta subcategoría? Esta acción desactivará la subcategoría en el sistema.')) {
             $.ajax({
                 url: '/api/subcategoria/' + id,
                 type: 'DELETE',
                 success: function(response) {
                     // Actualizar la tabla sin recargar la página
                     $('#tblSubCategoria').DataTable().ajax.reload();
-                    mostrarNotificacion('Subcategoria eliminada correctamente', 'success');
+                    mostrarNotificacion('Subcategoría eliminada correctamente', 'success');
                 },
                 error: function(xhr) {
-                    mostrarNotificacion('Error al eliminar la subcategoria: ' + (xhr.responseText || 'Error desconocido'), 'danger');
+                    if (xhr.status === 409) {
+                        // Error específico: productos asociados
+                        mostrarNotificacion(xhr.responseText, 'warning');
+                    } else {
+                        // Otros errores
+                        mostrarNotificacion('Error al eliminar la subcategoría: ' + (xhr.responseText || 'Error desconocido'), 'danger');
+                    }
                 }
             });
         }
     });
-    
-    // Función para cargar los datos en el modal
-    function cargarDatosEnModal(subcategoria) {
-        $('#detalle-id').text(subcategoria.id);
-        $('#detalle-nombre').text(subcategoria.nombre);
-        $('#detalle-categoria').text(producto.nombre_categoria);
-        
-        // Manejo de la imagen de subcategoria
-        if (subcategoria.imagen_url) {
-            $('#detalle-imagen').attr('src', subcategoria.imagen_url);
-            $('#detalle-imagen-url').text(subcategoria.imagen_url);
-        } else {
-            $('#detalle-imagen').attr('src', '/img/no-image.png');
-            $('#detalle-imagen-url').text('No disponible');
-        }
-    }
     
     // Función para mostrar notificaciones elegantes
     function mostrarNotificacion(mensaje, tipo) {
@@ -110,7 +81,8 @@ $(document).ready(function() {
             'z-index': '9999',
             'min-width': '300px',
             'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
-            'border-left': tipo === 'success' ? '4px solid #28a745' : '4px solid #dc3545',
+            'border-left': tipo === 'success' ? '4px solid #28a745' : 
+                          (tipo === 'warning' ? '4px solid #ffc107' : '4px solid #dc3545'),
             'animation': 'slideIn 0.3s ease-out'
         });
         

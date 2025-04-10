@@ -51,6 +51,9 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
         Page<Producto> findAllActive(Pageable Pageable);
 
         @Query("SELECT p FROM Producto p WHERE p.id = :id")
-        Optional<Producto> findByIdIncludingInactive(@Param("id") Long id);        
+        Optional<Producto> findByIdIncludingInactive(@Param("id") Long id); 
+        
+        @Query("SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM Producto p WHERE p.idsubcategoria = :idsubcategoria AND p.estado_auditoria = true")
+        boolean existsByIdsubcategoriaAndEstado_auditoriaTrue(@Param("idsubcategoria") Long idsubcategoria);
 
 }
