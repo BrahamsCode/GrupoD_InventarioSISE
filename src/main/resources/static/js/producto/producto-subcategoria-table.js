@@ -1,6 +1,6 @@
 $(document).ready(function () {
     let subcategoriaId = window.location.pathname.split("/").pop();
-    $('#tblProducto').DataTable({
+    const tablaProductos = $('#tblProducto').DataTable({
         "processing": true,
         "serverSide": true,
         "ajax": {
@@ -18,51 +18,33 @@ $(document).ready(function () {
             }
         },
         "columns": [
+            { "data": "id" },
+            { "data": "nombre_categoria" },
+            { "data": "nombre_marca" },
+            { "data": "codigo" },
             {
-                "data": "id"
+                "data": "nombre",
+                "render": function (data) {
+                    // Limitar a 30 caracteres y añadir puntos suspensivos si es más largo
+                    return data.length > 30 ? data.substr(0, 30) + '...' : data;
+                }
             },
             {
-                "data": "nombre_categoria"
+                "data": "precio",
+                "render": function (data) {
+                    return 'S/ ' + parseFloat(data).toFixed(2);
+                }
             },
-            {
-                "data": "nombre_marca"
-            },
-            {
-                "data": "nombre_proveedor"
-            },
-            {
-                "data": "codigo"
-            },
-            {
-                "data": "nombre"
-            },
-            {
-                "data": "descripcion"
-            },
-            {
-                "data": "especificaciones"
-            },
-            {
-                "data": "precio"
-            },
-            {
-                "data": "stock"
-            },
-            {
-                "data": "imagen_url"
-            },
-            {
-                "data": "informacion_fabricante_url"
-            },
+            { "data": "stock" },
             {
                 "data": "id",
-                "render": function (data, _, _) {
+                "render": function (data) {
                     return '';
                 }
             }
         ],
-        "lengthMenu": [3, 6, 9, 12],
-        "pageLength": 3
+        "lengthMenu": [10, 20, 50, 100],
+        "pageLength": 10,
     });
     
     $(".btn-return").click(function () {

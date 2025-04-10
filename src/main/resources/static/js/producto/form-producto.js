@@ -54,10 +54,10 @@ $(document).ready(function() {
     // Función para cargar subcategorías
     function cargarSubcategorias() {
         $.ajax({
-            url: '/api/subcategoria/listar',
+            url: '/api/subcategoria/listartodo',
             type: 'GET',
             success: function(data) {
-                $('#subcategoria').empty().append('<option value="">Seleccione una categoría</option>');
+                $('#subcategoria').empty().append('<option value="">Seleccione una subcategoría</option>');
                 
                 data.content.forEach(function(subcategoria) {
                     $('#subcategoria').append(`<option value="${subcategoria.id}">${subcategoria.nombre}</option>`);
@@ -72,7 +72,7 @@ $(document).ready(function() {
     // Función para cargar marcas
     function cargarMarcas() {
         $.ajax({
-            url: '/api/marca/listar',
+            url: '/api/marca/listartodo',
             type: 'GET',
             success: function(data) {
                 $('#marca').empty().append('<option value="">Seleccione una marca</option>');
@@ -90,7 +90,7 @@ $(document).ready(function() {
     // Función para cargar proveedores
     function cargarProveedores() {
         $.ajax({
-            url: '/api/proveedor/listar',
+            url: '/api/proveedor/listartodo',
             type: 'GET',
             success: function(data) {
                 $('#proveedor').empty().append('<option value="">Seleccione un proveedor</option>');

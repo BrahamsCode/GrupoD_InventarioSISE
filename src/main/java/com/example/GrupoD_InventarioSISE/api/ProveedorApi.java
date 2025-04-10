@@ -33,4 +33,13 @@ public class ProveedorApi {
     ) {
         return iProveedorService.Paginado(search, PageRequest.of(page, size));
     }
+
+    @GetMapping("/listartodo")
+    public Page<ProveedorDto> listartodo(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "100") int size,
+            @RequestParam(value = "search", required = false) String search
+    ) {
+        return iProveedorService.Paginado(search, PageRequest.of(page, size));
+    }
 }

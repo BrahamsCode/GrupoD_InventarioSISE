@@ -25,10 +25,19 @@ public class MarcaApi {
     @Autowired
     private IMarcaService iMarcaService;
     
-    @GetMapping
+    @GetMapping("/listar")
     public Page<Marca> listar(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
+            @RequestParam(value = "search", required = false) String search
+            ) {
+        return iMarcaService.paginado(search, PageRequest.of(page, size));
+    }
+
+    @GetMapping("/listartodo")
+    public Page<Marca> listartodo(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "100") int size,
             @RequestParam(value = "search", required = false) String search
             ) {
         return iMarcaService.paginado(search, PageRequest.of(page, size));

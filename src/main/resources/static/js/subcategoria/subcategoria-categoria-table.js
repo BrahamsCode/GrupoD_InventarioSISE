@@ -33,7 +33,7 @@ $(document).ready(function () {
             {
                 "data": "id",
                 "render": function (data, _, _) {
-                    return '<a href="/producto/' + data + '">Ver Productos</a>';
+                    return '<a class="btn btn-outline-success" href="/producto/' + data + '">Ver Productos</a>';
                 }
             }
         ],

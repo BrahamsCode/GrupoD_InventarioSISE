@@ -23,12 +23,12 @@
     <!-- Sidebar -->
     <div th:fragment="sidebar" class="col-auto col-md-3 col-xl-2 px-0 bg-dark sidebar">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-            <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <span class="fs-5 d-none d-sm-inline">Sistema SISE</span>
+            <a href="/producto" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <img src="https://i.ibb.co/W4mKFZ0v/LOGO-SISE-2.png" alt="LOGO-SISE-2" width="200" height="100" href="#">
             </a>
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                 <li class="nav-item w-100">
-                    <a href="/" class="nav-link px-0 align-middle">
+                    <a th:href="@{/departamento/home}" class="nav-link px-0 align-middle">
                         <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                     </a>
                 </li>
@@ -38,7 +38,13 @@
                     </a>
                     <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                         <li class="w-100">
+                            <a th:href="@{/departamento}" class="nav-link px-0"> <span class="d-none d-sm-inline">Departamentos</span></a>
+                        </li>
+                        <li class="w-100">
                             <a th:href="@{/categoria}" class="nav-link px-0"> <span class="d-none d-sm-inline">Categorías</span></a>
+                        </li>
+                        <li class="w-100">
+                            <a th:href="@{/subcategoria}" class="nav-link px-0"> <span class="d-none d-sm-inline">SubCategorías</span></a>
                         </li>
                         <li class="w-100">
                             <a th:href="@{/producto}" class="nav-link px-0"> <span class="d-none d-sm-inline">Productos</span></a>
@@ -59,9 +65,6 @@
                         <li class="w-100">
                             <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Inventario</span></a>
                         </li>
-                        <li class="w-100">
-                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Ventas</span></a>
-                        </li>
                     </ul>
                 </li>
             </ul>
@@ -77,7 +80,7 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                    <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
                 </ul>
             </div>
         </div>

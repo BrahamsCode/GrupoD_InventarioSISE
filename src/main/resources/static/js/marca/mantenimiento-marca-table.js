@@ -4,7 +4,7 @@ $(document).ready(function () {
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "/api/marca",
+            "url": "/api/marca/listar",
             "type": "GET",
             "data": function (d) {
                 d.page = d.start / d.length;

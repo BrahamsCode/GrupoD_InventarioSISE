@@ -1,27 +1,24 @@
 <!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mantenimiento de Proveedores</title>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+<head th:replace="~{layout :: head('Mantenimiento de Proveedores')}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento de Proveedores</title>
+</head>
 
-        <!-- Estilos personalizados -->
-        <link rel="stylesheet" th:href="@{/css/styles.css}">
-        
-        <!-- jQuery y DataTables -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
-    </head>
-    <body>
+<body>
+    <div th:replace="~{layout :: main-content(~{::div.content})}">
+        <div class="content">
+            <h2 class="mb-4">Proveedores</h2>
 
-        <h2>Proveedores</h2>
-        <div class="container">
-            
-            <div class="table-container">
+            <div class="d-flex justify-content-end mb-3">
+                <button class="btn btn-primary" id="btnNuevoProveedor">
+                    <i class="bi bi-plus-circle"></i> Nuevo Proveedor
+                </button>
+            </div>
+
+            <div class="table-responsive">
                 <table id="tblProveedor" class="table table-bordered table-striped">
                     <thead class="table-dark">
                         <tr>
@@ -36,16 +33,11 @@
                     </thead>
                 </table>
             </div>
-
         </div>
+    </div>
+    <th:block th:replace="~{layout :: scripts}"></th:block>
+    <!-- DataTables Script -->
+    <script th:src="@{/js/proveedor/mantenimiento-proveedor-table.js}"></script>
+</body>
 
-
-
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-        <!-- DataTables Script -->
-        <script th:src="@{/js/proveedor/mantenimiento-proveedor-table.js}"></script>
-
-    </body>
 </html>

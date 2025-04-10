@@ -33,7 +33,7 @@ $(document).ready(function () {
             {
                 "data": "id",
                 "render": function (data, _, _) {
-                    return '<a href="/categoria/' + data + '">Ver Categorias</a>';
+                    return '';
                 }
             }
         ],

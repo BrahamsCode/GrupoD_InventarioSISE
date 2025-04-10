@@ -14,7 +14,7 @@
                 </button>
             </div>
             
-            <div class="table-container">
+            <div class="table-responsive">
                 <table id="tblCategoria" class="table table-bordered table-striped">
                     <thead class="table-dark">
                         <tr>
@@ -33,5 +33,7 @@
     <th:block th:replace="~{layout :: scripts}"></th:block>
     <!-- DataTables Script específico para esta página -->
     <script th:src="@{/js/categoria/mantenimiento-categoria-table.js}"></script>
+    <!-- Script para el crud modal específico para esta página -->
+    <script th:src="@{/js/categoria/categoria-crud-modal.js}"></script>
 </body>
 </html>
