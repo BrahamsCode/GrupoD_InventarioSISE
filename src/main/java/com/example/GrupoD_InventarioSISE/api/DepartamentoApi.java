@@ -33,4 +33,13 @@ public class DepartamentoApi {
             ) {
         return iDepartamentoService.paginado(search, PageRequest.of(page, size));
     }
+
+    @GetMapping("/listartodo")
+    public Page<Departamento> listartodo(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "100") int size,
+            @RequestParam(value = "search", required = false) String search
+            ) {
+        return iDepartamentoService.paginado(search, PageRequest.of(page, size));
+        }
 }

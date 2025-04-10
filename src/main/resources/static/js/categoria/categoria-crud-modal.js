@@ -1,10 +1,10 @@
 $(document).ready(function() {
-    // Variable para almacenar los datos de la subcategoria seleccionada
-    let subcategoriaSeleccionada = null;
+    // Variable para almacenar los datos de la categoria seleccionada
+    let categoriaSeleccionada = null;
     
     // Modificar la columna de acciones en la tabla
-    $('#tblSubCategoria').on('draw.dt', function() {
-        $('#tblSubCategoria tbody tr').each(function() {
+    $('#tblCategoria').on('draw.dt', function() {
+        $('#tblCategoria tbody tr').each(function() {
             const row = $(this);
             const id = row.find('td:first').text();
             const actionCell = row.find('td:last');
@@ -26,55 +26,55 @@ $(document).ready(function() {
     });
     
     // Manejador para botón de ver detalles
-    $('#tblSubCategoria').on('click', '.btn-ver-detalle', function() {
+    $('#tblCategoria').on('click', '.btn-ver-detalle', function() {
         const id = $(this).data('id');
         
-        // Obtener los datos completos de la subcategoria
+        // Obtener los datos completos de la categoria
         $.ajax({
-            url: '/api/subcategoria/' + id,
+            url: '/api/categoria/' + id,
             type: 'GET',
-            success: function(subcategoria) {
-                subcategoriaSeleccionada = subcategoria;
-                cargarDatosEnModal(subcategoria);
-                $('#detalleSubcategoriaModal').modal('show');
+            success: function(categoria) {
+                categoriaSeleccionada = categoria;
+                cargarDatosEnModal(categoria);
+                $('#detalleCategoriaModal').modal('show');
             },
             error: function() {
-                mostrarNotificacion('Error al cargar los detalles de la subcategoria', 'danger');
+                mostrarNotificacion('Error al cargar los detalles de la categoria', 'danger');
             }
         });
     });
     
     // Manejador para botón de editar en la tabla
-    $('#tblSubCategoria').on('click', '.btn-editar', function() {
+    $('#tblCategoria').on('click', '.btn-editar', function() {
         const id = $(this).data('id');
-        window.location.href = '/subcategoria/editar/' + id;
+        window.location.href = '/categoria/editar/' + id;
     });
     
     // Manejador para botón de eliminar en la tabla
-    $('#tblSubCategoria').on('click', '.btn-eliminar', function() {
+    $('#tblCategoria').on('click', '.btn-eliminar', function() {
         const id = $(this).data('id');
         
-        if (confirm('¿Está seguro de eliminar esta subcategoria? Esta acción desactivará la subcategoria en el sistema.')) {
+        if (confirm('¿Está seguro de eliminar esta categoria? Esta acción desactivará la categoria en el sistema.')) {
             $.ajax({
-                url: '/api/subcategoria/' + id,
+                url: '/api/categoria/' + id,
                 type: 'DELETE',
                 success: function(response) {
                     // Actualizar la tabla sin recargar la página
-                    $('#tblSubCategoria').DataTable().ajax.reload();
-                    mostrarNotificacion('Subcategoria eliminada correctamente', 'success');
+                    $('#tblCategoria').DataTable().ajax.reload();
+                    mostrarNotificacion('Categoria eliminada correctamente', 'success');
                 },
                 error: function(xhr) {
-                    mostrarNotificacion('Error al eliminar la subcategoria: ' + (xhr.responseText || 'Error desconocido'), 'danger');
+                    mostrarNotificacion('Error al eliminar la categoria: ' + (xhr.responseText || 'Error desconocido'), 'danger');
                 }
             });
         }
     });
     
     // Función para cargar los datos en el modal
-    function cargarDatosEnModal(subcategoria) {
-        $('#detalle-id').text(subcategoria.id);
-        $('#detalle-nombre').text(subcategoria.nombre);
-        $('#detalle-categoria').text(producto.nombre_categoria);
+    function cargarDatosEnModal(categoria) {
+        $('#detalle-id').text(categoria.id);
+        $('#detalle-nombre').text(categoria.nombre);
+        $('#detalle-departamento').text(categoria.nombre_departamento);
         
         // Manejo de la imagen de subcategoria
         if (subcategoria.imagen_url) {

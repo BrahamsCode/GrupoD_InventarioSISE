@@ -1,17 +1,17 @@
 $(document).ready(function() {
     const accion = $('#accion').val();
-    const subcategoriaId = $('#subcategoriaId').val();
+    const categoriaId = $('#categoriaId').val();
     
     // Cargar datos para selects
-    cargarCategorias();
+    cargarDepartamentos();
     
-    // Si es edición, cargar datos de la subcategoría
-    if (accion === 'editar' && subcategoriaId) {
-        cargarDatosSubcategoria(subcategoriaId);
+    // Si es edición, cargar datos de la categoría
+    if (accion === 'editar' && categoriaId) {
+        cargarDatosCategoria(categoriaId);
     }
     
     // Manejar envío del formulario
-    $('#subcategoriaForm').on('submit', function(e) {
+    $('#categoriaForm').on('submit', function(e) {
         e.preventDefault();
         
         // Validar formulario
@@ -22,68 +22,68 @@ $(document).ready(function() {
         }
         
         // Recopilar datos del formulario
-        const subcategoria = {
-            idcategoria: $('#categoria').val(),
+        const categoria = {
+            iddepartamento: $('#departamento').val(),
             nombre: $('#nombre').val(),
             imagen_url: $('#imagen_url').val(),
         };
         
         // Guardar o actualizar dependiendo de la acción
         if (accion === 'nuevo') {
-            guardarSubcategoria(subcategoria);
+            guardarCategoria(categoria);
         } else {
-            actualizarSubcategoria(subcategoriaId, subcategoria);
+            actualizarCategoria(categoriaId, categoria);
         }
     });
     
     // Botón cancelar
     $('#btnCancelar').on('click', function() {
-        window.location.href = '/subcategoria';
+        window.location.href = '/categoria';
     });
     
-    // Función para cargar categorías
-    function cargarCategorias() {
+    // Función para cargar departamentos
+    function cargarDepartamentos() {
         $.ajax({
-            url: '/api/categoria/listartodo',
+            url: '/api/departamento/listartodo',
             type: 'GET',
             success: function(data) {
-                $('#categoria').empty().append('<option value="">Seleccione una categoría</option>');
+                $('#departamento').empty().append('<option value="">Seleccione un departamento</option>');
                 
-                data.content.forEach(function(categoria) {
-                    $('#categoria').append(`<option value="${categoria.id}">${categoria.nombre}</option>`);
+                data.content.forEach(function(departamento) {
+                    $('#departamento').append(`<option value="${departamento.id}">${departamento.nombre}</option>`);
                 });
             },
             error: function() {
-                mostrarNotificacion('Error al cargar las categorías', 'danger');
+                mostrarNotificacion('Error al cargar los Departamentos', 'danger');
             }
         });
     }
     
-    // Función para cargar datos de una subcategoria existente
-    function cargarDatosSubcategoria(id) {
+    // Función para cargar datos de una categoria existente
+    function cargarDatosCategoria(id) {
         $.ajax({
-            url: '/api/subcategoria/' + id,
+            url: '/api/categoria/' + id,
             type: 'GET',
-            success: function(subcategoria) {
+            success: function(categoria) {
                 // Buscar los IDs correspondientes a los nombres
-                buscarIdCategoria(subcategoria.nombre_categoria).then(function(categoriaId) {
-                    $('#categoria').val(categoriaId);
+                buscarIdDepartamento(categoria.nombre_departamento).then(function(departamentoId) {
+                    $('#departamento').val(departamentoId);
                 });
                 // Llenar los demás campos
-                $('#nombre').val(subcategoria.nombre);
-                $('#imagen_url').val(subcategoria.imagen_url);
+                $('#nombre').val(categoria.nombre);
+                $('#imagen_url').val(categoria.imagen_url);
             },
             error: function() {
-                mostrarNotificacion('Error al cargar los datos de la subcategoria', 'danger');
+                mostrarNotificacion('Error al cargar los datos de la categoria', 'danger');
             }
         });
     }
     
     // Funciones para buscar IDs por nombre
-    function buscarIdCategoria(nombre) {
+    function buscarIdDepartamento(nombre) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: '/api/categoria/buscar-por-nombre?nombre=' + encodeURIComponent(nombre),
+                url: '/api/departamento/buscar-por-nombre?nombre=' + encodeURIComponent(nombre),
                 type: 'GET',
                 success: function(data) {
                     resolve(data.id);
@@ -95,40 +95,40 @@ $(document).ready(function() {
         });
     }
     
-    // Función para guardar una nueva subcategoria
-    function guardarSubcategoria(subcategoria) {
+    // Función para guardar una nueva categoria
+    function guardarCategoria(categoria) {
         $.ajax({
-            url: '/api/subcategoria',
+            url: '/api/categoria',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(subcategoria),
+            data: JSON.stringify(categoria),
             success: function() {
-                mostrarNotificacion('Subcategoria guardada correctamente', 'success');
+                mostrarNotificacion('Categoría guardada correctamente', 'success');
                 setTimeout(function() {
-                    window.location.href = '/subcategoria';
+                    window.location.href = '/categoria';
                 }, 1500);
             },
             error: function() {
-                mostrarNotificacion('Error al guardar la subcategoria', 'danger');
+                mostrarNotificacion('Error al guardar la categoria', 'danger');
             }
         });
     }
     
-    // Función para actualizar una subcategoria existente
-    function actualizarSubcategoria(id, subcategoria) {
+    // Función para actualizar una categoria existente
+    function actualizarCategoria(id, categoria) {
         $.ajax({
-            url: '/api/subcategoria/' + id,
+            url: '/api/categoria/' + id,
             type: 'PUT',
             contentType: 'application/json',
-            data: JSON.stringify(subcategoria),
+            data: JSON.stringify(categoria),
             success: function() {
-                mostrarNotificacion('SubCategoria actualizada correctamente', 'success');
+                mostrarNotificacion('Categoria actualizada correctamente', 'success');
                 setTimeout(function() {
-                    window.location.href = '/subcategoria';
+                    window.location.href = '/categoria';
                 }, 1500);
             },
             error: function() {
-                mostrarNotificacion('Error al actualizar la subcategoria', 'danger');
+                mostrarNotificacion('Error al actualizar la categoria', 'danger');
             }
         });
     }
