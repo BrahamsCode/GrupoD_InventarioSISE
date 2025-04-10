@@ -50,10 +50,12 @@ public class SubCategoriaController {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarSubCategoria(Model model, @PathVariable Long id) {
-        model.addAttribute("id", id);
+    public String editarSubCategoria( @PathVariable Long id, Model model) {
+        List<Categoria> categorias = categoriaService.listarTodas(); // Obtener la lista de categorias
+        model.addAttribute("categorias", categorias); // Pasar la lista de categorias al modelo
         model.addAttribute("titulo", "Editar SubCategoria");
         model.addAttribute("accion", "editar");
+        model.addAttribute("id", id);
         return "subcategoria/form-subcategoria";
     }
 }

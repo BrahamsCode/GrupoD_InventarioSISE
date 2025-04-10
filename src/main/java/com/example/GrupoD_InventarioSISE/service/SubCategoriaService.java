@@ -57,4 +57,26 @@ public class SubCategoriaService implements ISubCategoriaService{
         return SubCategoriaMapper.toDto(subcategoria);
     }
 
+    @Override
+    public SubCategoria obtenerPorId(Long id) {
+        return subCategoriaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Subcategoría no encontrada con ID: " + id));
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        SubCategoria subcategoria = subCategoriaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Subcategoría no encontrada con ID: " + id));
+        subcategoria.setEstado_auditoria(false); 
+        subCategoriaRepository.save(subcategoria);
+    }
+
+    @Override
+    public void actualizar(SubCategoria subcategoria) {
+        subCategoriaRepository.findById(subcategoria.getId())
+                .orElseThrow(() -> new RuntimeException("Subcategoría no encontrada con ID: " + subcategoria.getId()));
+
+        subCategoriaRepository.save(subcategoria);
+    }
+
 }
