@@ -15,4 +15,8 @@ import org.springframework.data.domain.Pageable;
 public interface IDepartamentoService {
     
     Page<Departamento> paginado (String search, Pageable pageable);
+    Departamento listarPorId(Long id);
+    void eliminar(Long id);
+    void guardar(Departamento departamento);
+    void actualizar(Departamento departamento);
 }

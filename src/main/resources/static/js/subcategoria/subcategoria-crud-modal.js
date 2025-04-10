@@ -111,8 +111,8 @@ $(document).ready(function() {
         }, 5000);
     }
     
-    // Manejador para botón de nueva subcategoría (desvinculamos primero)
-    $('#btnNuevaSubCategoria').off('click').on('click', function() {
+    // Manejador para botón de nueva subcategoria
+    $('#btnNuevaSubCategoria').on('click', function() {
         window.location.href = '/subcategoria/nuevo';
     });
 });

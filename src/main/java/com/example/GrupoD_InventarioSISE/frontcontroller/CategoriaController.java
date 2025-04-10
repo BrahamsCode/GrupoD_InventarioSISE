@@ -28,4 +28,19 @@ public class CategoriaController {
         model.addAttribute("id", id);
         return "categoria/categorias-por-departamento";
     }
+
+    @GetMapping("/nuevo")
+    public String nuevaCategoria(Model model) {
+        model.addAttribute("titulo", "Nueva Categoria");
+        model.addAttribute("accion", "nuevo");
+        return "categoria/form-categoria";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editarCategoria(@PathVariable Long id, Model model) {
+        model.addAttribute("titulo", "Editar Categoria");
+        model.addAttribute("accion", "editar");
+        model.addAttribute("id", id);
+        return "categoria/form-categoria";
+    }
 }

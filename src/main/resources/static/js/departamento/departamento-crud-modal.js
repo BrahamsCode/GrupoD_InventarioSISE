@@ -1,10 +1,10 @@
 $(document).ready(function() {
-    // Variable para almacenar los datos de la categoria seleccionada
-    let categoriaSeleccionada = null;
+    // Variable para almacenar los datos del departamento seleccionada
+    let departamentoSeleccionado = null;
     
     // Modificar la columna de acciones en la tabla
-    $('#tblCategoria').on('draw.dt', function() {
-        $('#tblCategoria tbody tr').each(function() {
+    $('#tblDepartamento').on('draw.dt', function() {
+        $('#tblDepartamento tbody tr').each(function() {
             const row = $(this);
             const id = row.find('td:first').text();
             const actionCell = row.find('td:last');
@@ -26,60 +26,60 @@ $(document).ready(function() {
     });
     
     // Manejador para botón de ver detalles
-    $('#tblCategoria').on('click', '.btn-ver-detalle', function() {
+    $('#tblDepartamento').on('click', '.btn-ver-detalle', function() {
         const id = $(this).data('id');
         
-        // Obtener los datos completos de la categoria
+        // Obtener los datos completos del departamento
         $.ajax({
-            url: '/api/categoria/' + id,
+            url: '/api/departamento/' + id,
             type: 'GET',
-            success: function(categoria) {
-                categoriaSeleccionada = categoria;
-                cargarDatosEnModal(categoria);
-                $('#detalleCategoriaModal').modal('show');
+            success: function(departamento) {
+                departamentoSeleccionado = departamento;
+                cargarDatosEnModal(departamento);
+                $('#detalleDepartamentoModal').modal('show');
             },
             error: function() {
-                mostrarNotificacion('Error al cargar los detalles de la categoria', 'danger');
+                mostrarNotificacion('Error al cargar los detalles del departamento', 'danger');
             }
         });
     });
     
     // Manejador para botón de editar en la tabla
-    $('#tblCategoria').on('click', '.btn-editar', function() {
+    $('#tblDepartamento').on('click', '.btn-editar', function() {
         const id = $(this).data('id');
-        window.location.href = '/categoria/editar/' + id;
+        window.location.href = '/departamento/editar/' + id;
     });
     
     // Manejador para botón de eliminar en la tabla
-    $('#tblCategoria').on('click', '.btn-eliminar', function() {
+    $('#tblDepartamento').on('click', '.btn-eliminar', function() {
         const id = $(this).data('id');
         
-        if (confirm('¿Está seguro de eliminar esta categoria? Esta acción desactivará la categoria en el sistema.')) {
+        if (confirm('¿Está seguro de eliminar este departamento? Esta acción desactivará el departamento en el sistema.')) {
             $.ajax({
-                url: '/api/categoria/' + id,
+                url: '/api/departamento/' + id,
                 type: 'DELETE',
                 success: function(response) {
                     // Actualizar la tabla sin recargar la página
-                    $('#tblCategoria').DataTable().ajax.reload();
-                    mostrarNotificacion('Categoria eliminada correctamente', 'success');
+                    $('#tblDepartamento').DataTable().ajax.reload();
+                    mostrarNotificacion('Departamento eliminada correctamente', 'success');
                 },
                 error: function(xhr) {
-                    mostrarNotificacion('Error al eliminar la categoria: ' + (xhr.responseText || 'Error desconocido'), 'danger');
+                    mostrarNotificacion('Error al eliminar el departamento: ' + (xhr.responseText || 'Error desconocido'), 'danger');
                 }
             });
         }
     });
     
     // Función para cargar los datos en el modal
-    function cargarDatosEnModal(categoria) {
-        $('#detalle-id').text(categoria.id);
-        $('#detalle-nombre').text(categoria.nombre);
-        $('#detalle-departamento').text(categoria.nombre_departamento);
+    function cargarDatosEnModal(departamento) {
+        $('#detalle-id').text(departamento.id);
+        $('#detalle-nombre').text(departamento.nombre);
+        $('#detalle-descripcion').text(departamento.descripcion);
         
-        // Manejo de la imagen de subcategoria
-        if (categoria.imagen_url) {
-            $('#detalle-imagen').attr('src', categoria.imagen_url);
-            $('#detalle-imagen-url').text(categoria.imagen_url);
+        // Manejo de la imagen de departamento
+        if (departamento.imagen_url) {
+            $('#detalle-imagen').attr('src', departamento.imagen_url);
+            $('#detalle-imagen-url').text(departamento.imagen_url);
         } else {
             $('#detalle-imagen').attr('src', '/img/no-image.png');
             $('#detalle-imagen-url').text('No disponible');
@@ -139,8 +139,8 @@ $(document).ready(function() {
         }, 5000);
     }
     
-    // Manejador para botón de nueva categoria
-    $('#btnNuevaCategoria').on('click', function() {
-        window.location.href = '/categoria/nuevo';
+    // Manejador para botón de nuevo departamento
+    $('#btnNuevoDepartamento').on('click', function() {
+        window.location.href = '/departamento/nuevo';
     });
 });
