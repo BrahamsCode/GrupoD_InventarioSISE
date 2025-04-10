@@ -50,4 +50,11 @@ public class SubCategoriaService implements ISubCategoriaService{
         subCategoriaRepository.save(subcategoria);
     }
 
+    @Override
+    public SubCategoriaDto obtenerDtoPorId(Long id) {
+        SubCategoria subcategoria = subCategoriaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Subcategoría no encontrada con ID: " + id));
+        return SubCategoriaMapper.toDto(subcategoria);
+    }
+
 }

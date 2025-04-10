@@ -48,5 +48,12 @@ public class SubCategoriaController {
         model.addAttribute("accion", "nuevo");
         return "subcategoria/form-subcategoria";
     }
-    
+
+    @GetMapping("/editar/{id}")
+    public String editarSubCategoria(Model model, @PathVariable Long id) {
+        model.addAttribute("id", id);
+        model.addAttribute("titulo", "Editar SubCategoria");
+        model.addAttribute("accion", "editar");
+        return "subcategoria/form-subcategoria";
+    }
 }

@@ -18,5 +18,6 @@ public interface ISubCategoriaService {
     
     Page<SubCategoriaDto> Paginado(String search, Pageable pageable);
     Page<SubCategoriaDto> listarDtoPorCategoria(Long idcategoria, String search, Pageable pageable);
+    SubCategoriaDto obtenerDtoPorId(Long id);
     void guardar(SubCategoria subcategoria);
 }

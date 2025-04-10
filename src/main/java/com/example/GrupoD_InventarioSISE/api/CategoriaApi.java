@@ -34,6 +34,15 @@ public class CategoriaApi {
     ) {
         return iCategoriaService.Paginado(search, PageRequest.of(page, size));
     }
+
+    @GetMapping("/listartodo")
+    public Page<CategoriaDto> listartodo(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "100") int size,
+            @RequestParam(value = "search", required = false) String search
+    ) {
+        return iCategoriaService.Paginado(search, PageRequest.of(page, size));
+    }
     
     @GetMapping("/listar-departamento/{id}")
     public Page<CategoriaDto> listarPorDepartamento(

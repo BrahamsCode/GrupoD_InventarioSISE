@@ -57,7 +57,7 @@ $(document).ready(function() {
             url: '/api/subcategoria/listartodo',
             type: 'GET',
             success: function(data) {
-                $('#subcategoria').empty().append('<option value="">Seleccione una categoría</option>');
+                $('#subcategoria').empty().append('<option value="">Seleccione una subcategoría</option>');
                 
                 data.content.forEach(function(subcategoria) {
                     $('#subcategoria').append(`<option value="${subcategoria.id}">${subcategoria.nombre}</option>`);

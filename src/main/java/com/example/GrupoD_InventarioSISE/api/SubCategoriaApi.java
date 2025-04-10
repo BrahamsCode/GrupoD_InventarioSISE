@@ -62,6 +62,11 @@ public class SubCategoriaApi {
         return iSubCategoriaService.listarDtoPorCategoria(id, search, PageRequest.of(page, size));
     }
 
+    @GetMapping("/{id}")
+    public SubCategoriaDto obtenerPorId(@PathVariable Long id) {
+        return iSubCategoriaService.obtenerDtoPorId(id);
+    }
+
     @PostMapping
     public ResponseEntity<?> guardar(@RequestBody SubCategoria subcategoria) {
         try {
