@@ -8,6 +8,7 @@ import com.example.GrupoD_InventarioSISE.dto.SubCategoriaDto;
 import com.example.GrupoD_InventarioSISE.iservice.ISubCategoriaService;
 import com.example.GrupoD_InventarioSISE.mapper.SubCategoriaMapper;
 import com.example.GrupoD_InventarioSISE.model.SubCategoria;
+import com.example.GrupoD_InventarioSISE.repository.ProductoRepository;
 import com.example.GrupoD_InventarioSISE.repository.SubCategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +24,9 @@ public class SubCategoriaService implements ISubCategoriaService{
     
     @Autowired
     private SubCategoriaRepository subCategoriaRepository;
+
+    @Autowired
+    private ProductoRepository productoRepository;
 
     @Override
     public Page<SubCategoriaDto> Paginado(String search, Pageable pageable) {
@@ -65,9 +69,13 @@ public class SubCategoriaService implements ISubCategoriaService{
 
     @Override
     public void eliminar(Long id) {
-        SubCategoria subcategoria = subCategoriaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Subcategoría no encontrada con ID: " + id));
-        subcategoria.setEstado_auditoria(false); 
+        boolean existenProductos = productoRepository.existsByIdsubcategoriaAndEstado_auditoriaTrue(id);
+        
+        if (existenProductos) {
+            throw new IllegalStateException("No se puede eliminar la subcategoría porque tiene productos asociados");
+        }
+        SubCategoria subcategoria = obtenerPorId(id);
+        subcategoria.setEstado_auditoria(false);
         subCategoriaRepository.save(subcategoria);
     }
 
