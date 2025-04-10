@@ -139,7 +139,7 @@ $(document).ready(function() {
         }, 5000);
     }
     
-    // Manejador para botón de nuevo producto
+    // Manejador para botón de nueva subcategoria
     $('#btnNuevaSubCategoria').on('click', function() {
         window.location.href = '/subcategoria/nuevo';
     });

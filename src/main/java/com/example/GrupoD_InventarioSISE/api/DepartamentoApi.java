@@ -42,4 +42,6 @@ public class DepartamentoApi {
             ) {
         return iDepartamentoService.paginado(search, PageRequest.of(page, size));
         }
+
+    
 }

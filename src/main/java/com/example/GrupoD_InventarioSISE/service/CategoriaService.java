@@ -48,4 +48,39 @@ public class CategoriaService implements ICategoriaService{
     public List<Categoria> listarTodas() {
         return categoriaRepository.findAll();
     }
+
+    @Override
+    public CategoriaDto obtenerDtoPorId(Long id) {
+        Categoria categoria = categoriaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + id));
+        return CategoriaMapper.toDto(categoria);
+    }
+
+    @Override
+    public Categoria obtenerPorId(Long id) {
+        return categoriaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + id));
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        Categoria categoria = categoriaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + id));
+        categoria.setEstado_auditoria(false);
+        categoriaRepository.save(categoria);
+    }
+
+    @Override
+    public void guardar(Categoria categoria) {
+        categoria.setEstado_auditoria(true);
+        categoriaRepository.save(categoria);
+    }
+
+    @Override
+    public void actualizar(Categoria categoria) {
+        categoriaRepository.findById(categoria.getId())
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + categoria.getId()));
+
+        categoriaRepository.save(categoria);
+    }
 }

@@ -77,9 +77,9 @@ $(document).ready(function() {
         $('#detalle-departamento').text(categoria.nombre_departamento);
         
         // Manejo de la imagen de subcategoria
-        if (subcategoria.imagen_url) {
-            $('#detalle-imagen').attr('src', subcategoria.imagen_url);
-            $('#detalle-imagen-url').text(subcategoria.imagen_url);
+        if (categoria.imagen_url) {
+            $('#detalle-imagen').attr('src', categoria.imagen_url);
+            $('#detalle-imagen-url').text(categoria.imagen_url);
         } else {
             $('#detalle-imagen').attr('src', '/img/no-image.png');
             $('#detalle-imagen-url').text('No disponible');
@@ -139,8 +139,8 @@ $(document).ready(function() {
         }, 5000);
     }
     
-    // Manejador para botón de nuevo producto
-    $('#btnNuevaSubCategoria').on('click', function() {
-        window.location.href = '/subcategoria/nuevo';
+    // Manejador para botón de nueva categoria
+    $('#btnNuevaCategoria').on('click', function() {
+        window.location.href = '/categoria/nuevo';
     });
 });
