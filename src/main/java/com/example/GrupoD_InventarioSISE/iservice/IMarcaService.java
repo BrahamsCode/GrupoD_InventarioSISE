@@ -15,4 +15,8 @@ import org.springframework.data.domain.Pageable;
 public interface IMarcaService {
     
     Page<Marca> paginado (String search, Pageable pageable);
+    Marca listarPorId(Long id);
+    Marca guardar(Marca marca);
+    void eliminar(Long id);
+    void actualizar(Marca marca);
 }

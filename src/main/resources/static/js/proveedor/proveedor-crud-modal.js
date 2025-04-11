@@ -1,10 +1,10 @@
 $(document).ready(function() {
-    // Variable para almacenar los datos de la marca seleccionada
-    let marcaSeleccionada = null;
+    // Variable para almacenar los datos del producto seleccionado
+    let proveedorSeleccionado = null;
     
     // Modificar la columna de acciones en la tabla
-    $('#tblMarca').on('draw.dt', function() {
-        $('#tblMarca tbody tr').each(function() {
+    $('#tblProveedor').on('draw.dt', function() {
+        $('#tblProveedor tbody tr').each(function() {
             const row = $(this);
             const id = row.find('td:first').text();
             const actionCell = row.find('td:last');
@@ -26,50 +26,51 @@ $(document).ready(function() {
     });
     
     // Manejador para botón de ver detalles
-    $('#tblMarca').on('click', '.btn-ver-detalle', function() {
+    $('#tblProveedor').on('click', '.btn-ver-detalle', function() {
         const id = $(this).data('id');
         
-        // Obtener los datos completos de la marca
+        // Obtener los datos completos del proveedor
         $.ajax({
-            url: '/api/marca/' + id,
+            url: '/api/proveedor/' + id,
             type: 'GET',
-            success: function(marca) {
-                marcaSeleccionada = marca;
-                cargarDatosEnModal(marca);
-                $('#detalleMarcaModal').modal('show');
+            success: function(proveedor) {
+                proveedorSeleccionado = proveedor;
+                cargarDatosEnModal(proveedor);
+                $('#detalleProveedorModal').modal('show');
             },
             error: function() {
-                mostrarNotificacion('Error al cargar los detalles de la marca', 'danger');
+                mostrarNotificacion('Error al cargar los detalles del proveedor', 'danger');
             }
         });
     });
     
     // Manejador para botón de editar en la tabla
-    $('#tblMarca').on('click', '.btn-editar', function() {
+    $('#tblProveedor').on('click', '.btn-editar', function() {
         const id = $(this).data('id');
-        window.location.href = '/marca/editar/' + id;
+        window.location.href = '/proveedor/editar/' + id;
     });
     
     // Manejador para botón de eliminar en la tabla
-    $('#tblMarca').on('click', '.btn-eliminar', function() {
+    $('#tblProveedor').on('click', '.btn-eliminar', function() {
         const id = $(this).data('id');
         
-        if (confirm('¿Está seguro de eliminar esta marca? Esta acción desactivará la marca en el sistema.')) {
+        if (confirm('¿Está seguro de eliminar este proveedor? Esta acción desactivará el proveedor en el sistema.')) {
             $.ajax({
-                url: '/api/marca/' + id,
+                url: '/api/proveedor/' + id,
                 type: 'DELETE',
                 success: function(response) {
                     // Actualizar la tabla sin recargar la página
-                    $('#tblMarca').DataTable().ajax.reload();
-                    mostrarNotificacion('Marca eliminada correctamente', 'success');
+                    $('#tblProveedor').DataTable().ajax.reload();
+                    mostrarNotificacion('proveedor eliminado correctamente', 'success');
                 },
                 error: function(xhr) {
-                    mostrarNotificacion('Error al eliminar el marca: ' + (xhr.responseText || 'Error desconocido'), 'danger');
+                    mostrarNotificacion('Error al eliminar el proveedor: ' + (xhr.responseText || 'Error desconocido'), 'danger');
                 }
             });
         }
     });
-
+    
+    
     // Función para mostrar notificaciones elegantes
     function mostrarNotificacion(mensaje, tipo) {
         // Eliminar notificaciones anteriores
@@ -123,8 +124,8 @@ $(document).ready(function() {
         }, 5000);
     }
     
-    // Manejador para botón de nueva marca
-    $('#btnNuevaMarca').on('click', function() {
-        window.location.href = '/marca/nuevo';
+    // Manejador para botón de nuevo producto
+    $('#btnNuevoProveedor').on('click', function() {
+        window.location.href = '/proveedor/nuevo';
     });
 });

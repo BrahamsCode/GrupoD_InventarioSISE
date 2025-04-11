@@ -34,5 +34,39 @@ public class ProveedorService implements IProveedorService{
         }
         return ProveedorMapper.toDtoList(proveedores, pageable);
     }
+
+    @Override
+    public ProveedorDto obtenerDtoPorId(Long id) {
+        Proveedor proveedor = proveedorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Proveedor no encontrado con ID: " + id));
+        return ProveedorMapper.toDto(proveedor);
+    }
+
+    @Override
+    public Proveedor obtenerPorId(Long id) {
+        return proveedorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Proveedor no encontrado con ID: " + id));
+    }
+
+    @Override
+    public void guardar(Proveedor proveedor) {
+        proveedor.setEstado_auditoria(true); // Establecer el estado de auditoría como activo
+        proveedorRepository.save(proveedor); // Guardar el proveedor en la base de datos
+    }
+
+    @Override
+    public void actualizar(Proveedor proveedor) {
+        proveedorRepository.findById(proveedor.getId())
+                .orElseThrow(() -> new RuntimeException("Proveedor no encontrado con ID: " + proveedor.getId()));
+        proveedorRepository.save(proveedor); // Guardar el proveedor actualizado en la base de datos
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        Proveedor proveedor = proveedorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Proveedor no encontrado con ID: " + id));
+        proveedor.setEstado_auditoria(false); // Establecer el estado de auditoría como inactivo
+        proveedorRepository.save(proveedor); // Guardar el proveedor actualizado en la base de datos
+    }
     
 }

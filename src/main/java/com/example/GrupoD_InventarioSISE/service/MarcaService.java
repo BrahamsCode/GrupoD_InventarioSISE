@@ -35,4 +35,31 @@ public class MarcaService implements IMarcaService{
     public List<Marca> listarTodas() {
         return marcaRepository.findAll();
     }
+
+    @Override
+    public Marca listarPorId(Long id) {
+        return marcaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Marca no encontrada con ID: " + id));
+    }
+
+    @Override
+    public Marca guardar(Marca marca) {
+        marca.setEstado_auditoria(true); // Establecer el estado como activo
+        return marcaRepository.save(marca);
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        Marca marca = marcaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Marca no encontrada con ID: " + id));
+        marca.setEstado_auditoria(false); // Cambiar el estado a inactivo
+        marcaRepository.save(marca);
+    }
+
+    @Override
+    public void actualizar(Marca marca) {
+        marcaRepository.findById(marca.getId())
+                .orElseThrow(() -> new RuntimeException("Marca no encontrada con ID: " + marca.getId()));
+        marcaRepository.save(marca);
+    }
 }
