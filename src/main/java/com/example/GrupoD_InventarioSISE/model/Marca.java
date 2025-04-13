@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
  * @author RANDY
  */
 @Entity
-@Table(name = "Marcas")
+@Table(name = "gd_marca")
 public class Marca {
     
     @Id

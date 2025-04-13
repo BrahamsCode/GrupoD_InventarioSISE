@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
  * @author RANDY
  */
 @Entity
-@Table(name = "Tipo_documentos")
+@Table(name = "gd_tipo_documento")
 public class TipoDocumento {
     
     @Id

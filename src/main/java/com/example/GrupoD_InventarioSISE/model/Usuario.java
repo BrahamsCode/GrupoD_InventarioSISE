@@ -3,7 +3,7 @@ package com.example.GrupoD_InventarioSISE.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "gd_usuario")
 public class Usuario {
 
     @Id
