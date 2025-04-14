@@ -29,48 +29,43 @@
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                 <li class="nav-item w-100">
                     <a th:href="@{/departamento/home}" class="nav-link px-0 align-middle">
-                        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                        <i class="fs-4 bi-house"></i> <span class="ms-1 d-sm-inline">Home</span>
                     </a>
                 </li>
                 <li class="w-100">
                     <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                        <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Catálogos</span>
+                        <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Catálogos</span>
                     </a>
                     <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                         <li class="w-100">
-                            <a th:href="@{/departamento}" class="nav-link px-0"> <span class="d-none d-sm-inline">Departamentos</span></a>
+                            <a th:href="@{/departamento}" class="nav-link px-0"> <span class="d-sm-inline">Departamentos</span></a>
                         </li>
                         <li class="w-100">
-                            <a th:href="@{/categoria}" class="nav-link px-0"> <span class="d-none d-sm-inline">Categorías</span></a>
+                            <a th:href="@{/categoria}" class="nav-link px-0"> <span class="d-sm-inline">Categorías</span></a>
                         </li>
                         <li class="w-100">
-                            <a th:href="@{/subcategoria}" class="nav-link px-0"> <span class="d-none d-sm-inline">SubCategorías</span></a>
+                            <a th:href="@{/subcategoria}" class="nav-link px-0"> <span class="d-sm-inline">SubCategorías</span></a>
                         </li>
                         <li class="w-100">
-                            <a th:href="@{/producto}" class="nav-link px-0"> <span class="d-none d-sm-inline">Productos</span></a>
+                            <a th:href="@{/producto}" class="nav-link px-0"> <span class="d-sm-inline">Productos</span></a>
                         </li>
                         <li class="w-100">
-                            <a th:href="@{/marca}" class="nav-link px-0"> <span class="d-none d-sm-inline">Marcas</span></a>
+                            <a th:href="@{/marca}" class="nav-link px-0"> <span class="d-sm-inline">Marcas</span></a>
                         </li>
                         <li class="w-100">
-                            <a th:href="@{/proveedor}" class="nav-link px-0"> <span class="d-none d-sm-inline">Proveedores</span></a>
+                            <a th:href="@{/proveedor}" class="nav-link px-0"> <span class="d-sm-inline">Proveedores</span></a>
                         </li>
                     </ul>
                 </li>
                 <li class="w-100">
                     <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Reportes</span>
+                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline">Reportes</span>
                     </a>
-                    <li class="w-100">
-                        <a th:href="@{/reporte}" class="nav-link px-0">
-                            <span class="d-none d-sm-inline">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="w-100">
-                        <a th:href="@{/reporte/stock-bajo}" class="nav-link px-0">
-                            <span class="d-none d-sm-inline">Stock Bajo</span>
-                        </a>
-                    </li>
+                    <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                        <li class="w-100">
+                            <a href="#" class="nav-link px-0"> <span class="d-sm-inline">Inventario</span></a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
             <hr>
