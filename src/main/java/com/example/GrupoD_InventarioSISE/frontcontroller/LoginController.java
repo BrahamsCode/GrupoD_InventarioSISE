@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 import com.example.GrupoD_InventarioSISE.model.Usuario;
 import com.example.GrupoD_InventarioSISE.repository.UsuarioRepository;
@@ -23,12 +24,17 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model, @RequestParam(required = false) String error) {
+        if (error != null) {
+            model.addAttribute("error", "Credenciales inválidas");
+        }
         return "login";
     }
- 
+
     @PostMapping("/login")
-    public String processLogin(@RequestParam String username, @RequestParam String password, HttpSession session,
+    public String processLogin(@RequestParam String username,
+            @RequestParam String password,
+            HttpSession session,
             Model model) {
         Usuario usuario = usuarioRepository.findByUsername(username);
 

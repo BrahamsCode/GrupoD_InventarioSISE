@@ -26,13 +26,24 @@
       width: 120px;
       margin-bottom: 20px;
     }
+    
+    .error-message {
+      color: #ff1744;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
 
 <div class="login-card text-center">
-    <img th:src="@{/img/sise.png}" alt="Logo SISE" class="logo">
+  <img th:src="@{/img/sise.png}" alt="Logo SISE" class="logo">
   <h4 class="mb-4">Iniciar Sesión</h4>
+  
+  <!-- Mensaje de error para credenciales inválidas -->
+  <div th:if="${error}" class="error-message" th:text="${error}">
+    <!-- El mensaje de error se insertará aquí -->
+  </div>
 
   <form th:action="@{/login}" method="post">
     <div class="mb-3">
