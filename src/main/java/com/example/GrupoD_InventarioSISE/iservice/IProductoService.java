@@ -16,9 +16,7 @@ import com.example.GrupoD_InventarioSISE.model.Producto;
 public interface IProductoService {
     
     Page<ProductoDto> Paginado(String search, Pageable pageable);
-    Page<ProductoDto> listarDtoPorSubCategoria(Long idsubcategoria, String search, Pageable pageable);    
-    Page<ProductoDto> obtenerProductosStockBajo(int umbral, Pageable pageable);
-    long contarProductosStockBajo(int umbral);
+    Page<ProductoDto> listarDtoPorSubCategoria(Long idsubcategoria, String search, Pageable pageable);
     ProductoDto obtenerDtoPorId(Long id);
     Producto obtenerPorId(Long id);
     void eliminar(Long id);
